@@ -3,7 +3,7 @@ session_start();
 
 // Database configuration
 $host = 'localhost'; // Database host
-$dbname = 'midterm'; // Database name
+$dbname = 'store_db'; // Database name
 $username = 'root'; // Database username
 $password = ''; // Database password
 
