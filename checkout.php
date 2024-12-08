@@ -38,6 +38,7 @@ try {
     }
 
     // Extract item details
+    $order_id = $itemDetails['order_id'];
     $name = $itemDetails['name'];
     $description = $itemDetails['description'];
     $price = $itemDetails['price'];
@@ -53,25 +54,25 @@ try {
 $pdo = null;
 foreach ($clothingItems as $item) {
 
-    if (isset($item['image']) && $i < 30 && $_SESSION['type'] === 'standard'){
+    if (isset($itemDetails['image']) && $i < 30 && $_SESSION['type'] === 'standard'){
         echo '
         <div class="col mb-5">
             <div class="card h-100">
                 <!-- Product image-->
-                <img class="card-img-top" src="' . htmlspecialchars($item['image']) . '" alt="..." />
+                <img class="card-img-top" src="' . htmlspecialchars($itemDetails['image']) . '" alt="..." />
                 <!-- Product details-->
                 <div class="card-body p-4">
                     <div class="text-center">
                         <!-- Product name-->
-                        <h5 class="fw-bolder">' . htmlspecialchars($item['name']) . '</h5>
+                        <h5 class="fw-bolder">' . htmlspecialchars($itemDetails['name']) . '</h5>
                         <!-- Product price-->
-                        $' . htmlspecialchars(number_format($item['price'], 2)) . '
+                        $' . htmlspecialchars(number_format($itemDetails['price'], 2)) . '
                     </div>
                 </div>
                 <!-- Product actions-->
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div class="text-center">
-                        <a class="btn btn-outline-dark mt-auto" href="details.php?id=' . $item['ID'] . '">More details</a>
+                        <a class="btn btn-outline-dark mt-auto" href="details.php?id=' . $itemDetails['ID'] . '">More details</a>
                     </div> <!-- End of text-center -->
                 </div> <!-- End of card-footer -->
             </div> <!-- End of card -->
