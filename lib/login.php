@@ -17,6 +17,7 @@
             if ($user['password'] === $password){
                 $_SESSION['username'] = $username;
                 $_SESSION['role'] = $user['role'];
+                $_SESSION['user_id'] = $user['user_id'];
                 if ($user['role'] === 'admin'){
                     header("Location: ../admin.php");
                 } else{

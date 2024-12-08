@@ -66,10 +66,15 @@ if ($itemDetails) {
                 </div>
                 <p class="lead"><?= htmlspecialchars($description) ?></p>
                 <div class="d-flex mb-3">
-                    <a class="btn btn-outline-dark flex-shrink-0" href="#">
-                        <i class="bi-cart-fill me-1"></i>
-                        Add to cart
-                    </a>
+                    <form method="POST" action="./lib/add_to_cart.php">
+                        <input type="hidden" name="product_id" value="<?= htmlspecialchars($id) ?>">
+                        <input type="hidden" name="name" value="<?= htmlspecialchars($name) ?>">
+                        <input type="hidden" name="price" value="<?= htmlspecialchars($price) ?>">
+                        <button type="submit" class="btn btn-outline-dark flex-shrink-0">
+                            <i class="bi-cart-fill me-1"></i>
+                            Add to cart
+                        </button>
+                    </form>
                 </div>
                 <a class="btn btn-secondary" href="welcome.php">Back to Home</a>
             </div>
