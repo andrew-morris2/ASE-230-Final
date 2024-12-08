@@ -1,26 +1,56 @@
 <?php
 session_start();
-$id = $_GET['id'];
 
-$jsonFile = 'data/midtermdata.json';
-$jsonData = file_get_contents($jsonFile);
-$clothingItems = json_decode($jsonData, true);
+// Database configuration
+$host = 'localhost'; // Database host
+$dbname = 'midterm'; // Database name
+$username = 'root'; // Database username
+$password = ''; // Database password
 
-foreach ($clothingItems as $item) {
-    if ($item['ID'] == $id) {
-        $itemDetails = $item;
-        break;
+try {
+    // Create a new PDO instance
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    
+    // Set the PDO error mode to exception
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    // Get the item ID from the URL parameter
+    $id = isset($_GET['id']) ? $_GET['id'] : null;
+
+    // Check if the item ID is valid
+    if (!$id) {
+        echo "<h1>Error: Item ID is not provided.</h1>";
+        exit();
     }
-}
-if ($itemDetails) {
+
+    // Prepare and execute the SQL query to get item details
+    $stmt = $pdo->prepare("SELECT * FROM products WHERE ID = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+    $stmt->execute();
+
+    // Fetch the item details
+    $itemDetails = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Check if the item exists
+    if (!$itemDetails) {
+        echo "<h1>Item not found.</h1>";
+        exit();
+    }
+
+    // Extract item details
     $name = $itemDetails['name'];
     $description = $itemDetails['description'];
     $price = $itemDetails['price'];
     $image = $itemDetails['image'];
-} else {
-    echo "<h1>Item not found.</h1>";
+
+} catch (PDOException $e) {
+    // Handle connection errors
+    echo "Connection failed: " . $e->getMessage();
     exit();
 }
+
+// Close the connection
+$pdo = null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,29 +83,29 @@ if ($itemDetails) {
 
     <!-- Item Detail Section -->
     <section class="py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6">
-                <img class="card-img-top mb-5 mb-md-0" src="<?= htmlspecialchars($image) ?>" alt="<?= htmlspecialchars($name) ?>">
-            </div>
-            <div class="col-md-6">
-                <div class="small mb-1">Product ID: <?= htmlspecialchars($id) ?></div>
-                <h1 class="display-5 fw-bolder"><?= htmlspecialchars($name) ?></h1>
-                <div class="fs-5 mb-5">
-                    <span>$<?= htmlspecialchars(number_format($price, 2)) ?></span>
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <div class="col-md-6">
+                    <img class="card-img-top mb-5 mb-md-0" src="<?= htmlspecialchars($image) ?>" alt="<?= htmlspecialchars($name) ?>">
                 </div>
-                <p class="lead"><?= htmlspecialchars($description) ?></p>
-                <div class="d-flex mb-3">
-                    <a class="btn btn-outline-dark flex-shrink-0" href="#">
-                        <i class="bi-cart-fill me-1"></i>
-                        Add to cart
-                    </a>
+                <div class="col-md-6">
+                    <div class="small mb-1">Product ID: <?= htmlspecialchars($id) ?></div>
+                    <h1 class="display-5 fw-bolder"><?= htmlspecialchars($name) ?></h1>
+                    <div class="fs-5 mb-5">
+                        <span>$<?= htmlspecialchars(number_format($price, 2)) ?></span>
+                    </div>
+                    <p class="lead"><?= htmlspecialchars($description) ?></p>
+                    <div class="d-flex mb-3">
+                        <a class="btn btn -outline-dark flex-shrink-0" href="#">
+                            <i class="bi-cart-fill me-1"></i>
+                            Add to cart
+                        </a>
+                    </div>
+                    <a class="btn btn-secondary" href="welcome.php">Back to Home</a>
                 </div>
-                <a class="btn btn-secondary" href="welcome.php">Back to Home</a>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Footer -->
     <footer class="py-5 bg-dark">
