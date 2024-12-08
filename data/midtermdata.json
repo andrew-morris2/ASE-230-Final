@@ -1,0 +1,225 @@
+[
+    {
+        "ID": "CLO003",
+        "name": "Running Shoes",
+        "description": "Comfortable shoes for long-distance running.",
+        "price": "80",
+        "type": "Shoes",
+        "image": "https:\/\/i0.pickpik.com\/photos\/589\/84\/958\/running-shoe-shoe-asics-highly-functional-preview.jpg"
+    },
+    {
+        "ID": "CLO004",
+        "name": "Slim Fit Jeans",
+        "description": "Modern and sleek, great for casual wear.",
+        "price": 40,
+        "type": "Pants",
+        "image": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcRSJord9LpNXnFANAzxbu7zhMwPln2HyvOUmQ&s"
+    },
+    {
+        "ID": "CLO005",
+        "name": "Cotton T-Shirt",
+        "description": "Soft and breathable, perfect for everyday wear.",
+        "price": "15",
+        "type": "Shirt",
+        "image": "https:\/\/cdn.printerval.com\/unsafe\/960x960\/asset\/11561d0c0b010b0c190c111b561b1715574b48414a494f4d4d570a571114574d4d41494140574c4d4c484b484b4d484f571114271e0d1414001e0d1414564c4d4c484b484b4d484f271d1312025612081f"
+    },
+    {
+        "ID": "CLO006",
+        "name": "Wool Beanie",
+        "description": "Keeps you warm during the cold winter days.",
+        "price": "18.50",
+        "type": "Hat",
+        "image": "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/4\/4a\/Beanie_-_Knit_Cap_%2851013511676%29.jpg"
+    },
+    {
+        "ID": "CLO007",
+        "name": "Chukka Boots",
+        "description": "A stylish boot for both casual and formal outfits.",
+        "price": 95,
+        "type": "Shoes",
+        "image": "https:\/\/live.staticflickr.com\/5322\/29957699014_b2ef83057b_z.jpg"
+    },
+    {
+        "ID": "CLO008",
+        "name": "Denim Jacket",
+        "description": "A classic, durable jacket that never goes out of style.",
+        "price": 65,
+        "type": "Jacket",
+        "image": "https:\/\/cdn.printerval.com\/unsafe\/960x960\/asset\/11561d0c0b010b0c190c111b561b1715574c4149414c4b4e4f570a57111457484c4d414e1b574d4f4f4b404e4a4c494c571114271e0d1414001e0d1414564d4f4f4b404e4a4c494c271b19481d5612081f"
+    },
+    {
+        "ID": "CLO009",
+        "name": "Chino Pants",
+        "description": "Comfortable and versatile, suitable for any occasion.",
+        "price": 50,
+        "type": "Pants",
+        "image": "https:\/\/images.pexels.com\/photos\/17135748\/pexels-photo-17135748\/free-photo-of-new-women-s-pants.jpeg"
+    },
+    {
+        "ID": "CLO010",
+        "name": "Graphic Tee",
+        "description": "A fun and expressive t-shirt with a bold design.",
+        "price": 20,
+        "type": "Shirt",
+        "image": "https:\/\/cdn.printerval.com\/image\/960x960\/t-shirts-men-heavyweight-t-shirt-1,black,print-2023-12-22_285df1c1-28be-4ab1-9a43-b0f1f82ad352,2d2d2d.jpeg"
+    },
+    {
+        "ID": "CLO011",
+        "name": "Fedora",
+        "description": "An elegant hat for a refined, classic look.",
+        "price": 45,
+        "type": "Hat",
+        "image": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcQx5K8iKYgBWYQ-gkh-jBTDDvaDgFFHMxs4sA&s"
+    },
+    {
+        "ID": "CLO012",
+        "name": "Puffer Jacket",
+        "description": "Insulated and padded to keep you warm in the coldest climates.",
+        "price": 140,
+        "type": "Jacket",
+        "image": "https:\/\/images.pexels.com\/photos\/14333427\/pexels-photo-14333427.jpeg"
+    },
+    {
+        "ID": "CLO013",
+        "name": "Sneakers",
+        "description": "Casual shoes perfect for daily activities and sports.",
+        "price": 55,
+        "type": "Shoes",
+        "image": "https:\/\/pixnio.com\/free-images\/2020\/07\/26\/2020-07-26-08-40-56.jpg"
+    },
+    {
+        "ID": "CLO014",
+        "name": "Cargo Pants",
+        "description": "Durable pants with plenty of pockets for practicality.",
+        "price": 60,
+        "type": "Pants",
+        "image": "https:\/\/live.staticflickr.com\/7093\/7260350808_b916a4e634_c.jpg"
+    },
+    {
+        "ID": "CLO015",
+        "name": "Polo Shirt",
+        "description": "A smart, casual shirt with a timeless design.",
+        "price": 35,
+        "type": "Shirt",
+        "image": "https:\/\/cdn.printerval.com\/unsafe\/960x960\/asset\/11561d0c0b010b0c190c111b561b1715574a4b4f4e4e4b4b41570a571114571a1c4e4e4e19574c4a4f4b4d4a494d4a49571114271e0d1414001e0d1414564c4a4f4b4d4a494d4a49270b4e4a1d5612081f"
+    },
+    {
+        "ID": "CLO016",
+        "name": "Bucket Hat",
+        "description": "A relaxed, casual hat for sunny days.",
+        "price": 22,
+        "type": "Hat",
+        "image": "https:\/\/cdn.printerval.com\/unsafe\/960x960\/asset\/111049560a1d1c1a0d1a1a141d56161d0c571115191f1d564b41494a484e494c4d4b56484c4d4d570b0b0a1b17541a0d1b131d0c2710190c54080a171c0d1b0c544948494849484248491b4d1b194a4f1b4e54080a1115190a01540b090d190a1d54494848480049484848551a1f541e401e401e405612081f"
+    },
+    {
+        "ID": "CLO017",
+        "name": "Boots",
+        "description": "Sturdy and durable, ideal for outdoor adventures.",
+        "price": 90,
+        "type": "Shoes",
+        "image": "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/c\/cf\/Bates_enforcer_paratrooper_boots.jpg"
+    },
+    {
+        "ID": "CLO018",
+        "name": "Bomber Jacket",
+        "description": "A stylish and warm jacket with a military-inspired design.",
+        "price": 110,
+        "type": "Jacket",
+        "image": "https:\/\/cdn.printerval.com\/unsafe\/960x960\/asset\/11561d0c0b010b0c190c111b561b1715574b4a494f4d4f404d570a571114574f4c404b4949574c4e4c404c4d4e4b414b571114271e0d1414001e0d1414564c4e4c404c4d4e4b414b271b14131a5612081f"
+    },
+    {
+        "ID": "CLO019",
+        "name": "Slim Fit Trousers",
+        "description": "Fitted trousers for a sleek and formal look.",
+        "price": 75,
+        "type": "Pants",
+        "image": "https:\/\/live.staticflickr.com\/7199\/7146847421_78b4420123_b.jpg"
+    },
+    {
+        "ID": "CLO020",
+        "name": "Hawaiian Shirt",
+        "description": "A casual, colorful shirt perfect for beach days.",
+        "price": 28,
+        "type": "Shirt",
+        "image": "https:\/\/cdn.printerval.com\/unsafe\/960x960\/asset.prtvstatic.com\/printerval-mirror\/2023-09-27\/aed379440e6c5e95beeb96469986f4b3_8445.jpg"
+    },
+    {
+        "ID": "CLO021",
+        "name": "Panama Hat",
+        "description": "A stylish hat ideal for sunny vacations and tropical settings.",
+        "price": 35,
+        "type": "Hat",
+        "image": "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/a\/ae\/Optimo_Montecristi_Panama_Hat.jpg"
+    },
+    {
+        "ID": "CLO022",
+        "name": "Combat Boots",
+        "description": "Rugged boots designed for tough environments.",
+        "price": 120,
+        "type": "Shoes",
+        "image": "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/2\/2d\/Combat_boots_IMGP8979.jpg"
+    },
+    {
+        "ID": "CLO023",
+        "name": "Trench Coat",
+        "description": "A long, stylish coat designed for the rainy season.",
+        "price": 150,
+        "type": "Jacket",
+        "image": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSRjsdUa-gIDLjzGslF50A01DuW9o1N4HWicQ&s"
+    },
+    {
+        "ID": "CLO024",
+        "name": "Joggers",
+        "description": "Comfortable pants for lounging or exercising.",
+        "price": 30,
+        "type": "Pants",
+        "image": "https:\/\/cdn.printerval.com\/unsafe\/960x960\/asset\/11561d0c0b010b0c190c111b561b1715574a4e4d484c484048570a57111457194c4e4b4c4d574c4140414a4d494b484c571114271e0d1414001e0d1414564c4140414a4d494b484c271b404e155612081f"
+    },
+    {
+        "ID": "CLO025",
+        "name": "Henley Shirt",
+        "description": "A classic shirt with a casual and relaxed look.",
+        "price": 22,
+        "type": "Shirt",
+        "image": "https:\/\/www.google.com\/url?sa=i&url=https%3A%2F%2Fwww.flickr.com%2Fphotos%2Fhuzzahvintage%2F4202382118%2F&psig=AOvVaw0N_C1dv6EaXuDgKP5sb6xf&ust=1728601031268000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJDStOqygokDFQAAAAAdAAAAABAE"
+    },
+    {
+        "ID": "CLO026",
+        "name": "Visor",
+        "description": "A lightweight hat that shields your eyes from the sun.",
+        "price": 15,
+        "type": "Hat",
+        "image": "https:\/\/cdn.printerval.com\/unsafe\/960x960\/asset\/11561d0c0b010b0c190c111b561b171557494e494c41404e4d570a571114571c1a4a4f1c1d57494e404f4b4e4c404048571114271e0d1414001e0d141456494e404f4b4e4c4040482749134f0e5612081f"
+    },
+    {
+        "ID": "CLO027",
+        "name": "Chelsea Boots",
+        "description": "A classic and versatile boot style with elastic sides.",
+        "price": 110,
+        "type": "Shoes",
+        "image": "https:\/\/live.staticflickr.com\/65535\/51080437967_e72808a038_b.jpg"
+    },
+    {
+        "ID": "CLO028",
+        "name": "Peacoat",
+        "description": "A warm and stylish coat, perfect for winter outings.",
+        "price": "145",
+        "type": "Jacket",
+        "image": "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/a\/af\/Coat_MET_C.I.38.23.36_F2.jpg"
+    },
+    {
+        "ID": "CLO029",
+        "name": "Sweatpants",
+        "description": "Comfortable and relaxed pants, perfect for lounging.",
+        "price": 35,
+        "type": "Pants",
+        "image": "https:\/\/cdn.printerval.com\/unsafe\/960x960\/asset\/11561d0c0b010b0c190c111b561b1715574b40494e4048404b570a571114574b194b1c1c41574d484e4f4c414c4a4d4f571114271e0d1414001e0d1414564d484e4f4c414c4a4d4f274c081d0c5612081f"
+    },
+    {
+        "ID": "6709c67eec253",
+        "name": "Random shoes",
+        "price": "69.00",
+        "description": "A random pair of shoes to wear on Sunday probably",
+        "image": "https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcSzmzy1mM7klMf8riSuKlvOIorJ-_d1GXXDbQ&amp;s"
+    }
+]
