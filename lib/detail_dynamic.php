@@ -39,4 +39,3 @@ if (!$item) {
 header("Location: ../details.php?id=" . urlencode($id) . "&name=" . urlencode($item['name']) . "&description=" . urlencode($item['description']) . "&price=" . urlencode($item['price']) . "&image=" . urlencode($item['image']));
 exit();
 ?>
-
