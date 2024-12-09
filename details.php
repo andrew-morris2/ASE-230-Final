@@ -24,7 +24,7 @@ try {
     }
 
     // Prepare and execute the SQL query to get item details
-    $stmt = $pdo->prepare("SELECT * FROM products WHERE ID = :id");
+    $stmt = $pdo->prepare("SELECT * FROM Products WHERE ID = :id");
     $stmt->bindParam(':id', $id, PDO::PARAM_STR);
     $stmt->execute();
 

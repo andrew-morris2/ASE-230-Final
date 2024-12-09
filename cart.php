@@ -1,46 +1,63 @@
 <?php
 session_start();
-require 'db_connection.php'; // Include your DB connection
+include 'db_connection.php';
 
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    // Redirect to login if the user is not logged in
-    header('Location: login.php');
+// Ensure user is logged in
+if (!isset($_SESSION['username'])) {
+    echo "Please log in to view your cart.";
     exit();
 }
 
-// Get the user_id from session
-$user_id = $_SESSION['user_id'];
+// Get the user_id and order_id from session
+$username = $_SESSION['username'];
+$order_id = $_SESSION['order_id'] ?? null; // Get order_id if it exists in session
 
-// Check if the user has an active order
-$active_order_query = "SELECT * FROM orders WHERE user_id = ? AND status = 'in progress'";
-$stmt = $db->prepare($active_order_query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
+try {
+    $conn = new PDO("mysql:host=localhost;dbname=store_db", "root", "");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-if ($result->num_rows > 0) {
-    // User has an active order, get the order details
-    $order = $result->fetch_assoc();
-    $order_id = $order['order_id'];
+    // Look up the user_id based on username
+    $stmt = $conn->prepare("SELECT user_id FROM users WHERE username = :username");
+    $stmt->execute(['username' => $username]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Fetch the order items for the active order
-    $order_items_query = "SELECT oi.*, p.name AS product_name, p.price AS product_price FROM order_items oi
-                          JOIN products p ON oi.product_id = p.ID
-                          WHERE oi.order_id = ?";
-    $stmt = $db->prepare($order_items_query);
-    $stmt->bind_param("i", $order_id);
-    $stmt->execute();
-    $order_items = $stmt->get_result();
-
-    // Calculate the total price of the cart
-    $total_price = 0;
-    while ($item = $order_items->fetch_assoc()) {
-        $total_price += $item['quantity'] * $item['product_price'];
+    if (!$user) {
+        echo "User not found!";
+        exit();
     }
-} else {
-    // No active order, inform the user
-    echo "<h1>Your cart is empty.</h1>";
+
+    $user_id = $user['user_id']; // User ID from session
+
+    // If order_id is not set in session, fetch the most recent order
+    if (!$order_id) {
+        $stmt = $conn->prepare("SELECT order_id FROM Orders WHERE user_id = :user_id AND status = 'Pending' ORDER BY order_date DESC LIMIT 1");
+        $stmt->execute(['user_id' => $user_id]);
+        $order = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($order) {
+            $order_id = $order['order_id'];
+            $_SESSION['order_id'] = $order_id; // Set order_id in session
+        } else {
+            echo "No active order found.";
+            exit();
+        }
+    }
+
+    // Fetch all items in the user's cart (order_items)
+    $stmt = $conn->prepare("SELECT oi.product_id, oi.quantity, oi.price, p.name FROM order_items oi
+                            JOIN products p ON oi.product_id = p.ID
+                            WHERE oi.order_id = :order_id");
+    $stmt->execute(['order_id' => $order_id]);
+    $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Fetch total price of the order
+    $stmt = $conn->prepare("SELECT total_price FROM Orders WHERE order_id = :order_id");
+    $stmt->execute(['order_id' => $order_id]);
+    $order = $stmt->fetch(PDO::FETCH_ASSOC);
+    $total_price = $order['total_price'];
+
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
     exit();
 }
 ?>
@@ -48,83 +65,56 @@ if ($result->num_rows > 0) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Your Cart - Vogue Vault</title>
-    <!-- Bootstrap icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
-    <!-- Core theme CSS (includes Bootstrap) -->
-    <link href="css/styles.css" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Welcome to Vogue Vault</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="./css/styles.css" rel="stylesheet" />
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="index.php">Vogue Vault</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <a class="navbar-brand" href="#!">Vogue Vault</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="welcome.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">All Products</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                            <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="lib/signin.php">Sign Out</a></li>
                 </ul>
+                <form class="d-flex">
+                    <button class="btn btn-outline-dark" type="submit">
+                        <i class="bi-cart-fill me-1"></i>
+                        Cart
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    </button>
+                </form>
             </div>
         </div>
     </nav>
 
-    <!-- Cart Items Section -->
-    <section class="py-5">
-        <div class="container px-4 px-lg-5">
-            <h1 class="mb-4">Your Cart</h1>
-            <?php if ($result->num_rows > 0): ?>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    // Reset the result pointer to the start
-                    $order_items->data_seek(0);
-                    while ($item = $order_items->fetch_assoc()):
-                    ?>
-                    <tr>
-                        <td><?= htmlspecialchars($item['product_name']) ?></td>
-                        <td>$<?= htmlspecialchars(number_format($item['product_price'], 2)) ?></td>
-                        <td><?= htmlspecialchars($item['quantity']) ?></td>
-                        <td>$<?= htmlspecialchars(number_format($item['quantity'] * $item['product_price'], 2)) ?></td>
-                        <td>
-                            <a href="remove_item.php?item_id=<?= $item['order_item_id'] ?>" class="btn btn-danger btn-sm">Remove</a>
-                        </td>
-                    </tr>
-                    <?php endwhile; ?>
-                    <tr>
-                        <td colspan="3" class="text-end"><strong>Total Price:</strong></td>
-                        <td colspan="2">$<?= number_format($total_price, 2) ?></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="d-flex justify-content-end">
-                <a href="checkout.php" class="btn btn-primary">Proceed to Checkout</a>
-            </div>
-            <?php endif; ?>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
-        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Vogue Vault 2023</p></div>
-    </footer>
-
-    <!-- Bootstrap core JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS -->
-    <script src="js/scripts.js"></script>
-</body>
-</html>
+<h2>Your Cart</h2>
+<?php if ($items): ?>
+    <ul>
+        <?php foreach ($items as $item): ?>
+            <li>
+                <?php echo htmlspecialchars($item['product_name']); ?> - 
+                Quantity: <?php echo $item['quantity']; ?>, 
+                Price: $<?php echo number_format($item['price'], 2); ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+    <p>Total Price: $<?php echo number_format($total_price, 2); ?></p>
+<?php else: ?>
+    <p>Your cart is empty.</p>
+<?php endif; ?>
